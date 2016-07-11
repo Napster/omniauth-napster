@@ -1,8 +1,7 @@
 # -*- encoding: utf-8 -*-
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'omniauth/napster'
-require 'omniauth/strategies/napster'
+require 'omniauth-napster'
 
 Gem::Specification.new do |gem|
   gem.name          = "omniauth-napster"
