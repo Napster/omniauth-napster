@@ -8,8 +8,7 @@ module OmniAuth
 
       option :client_options, {
         :site          => 'https://api.napster.com',
-        :authorize_url => 'https://api.napster.com/oauth/authorize',
-        :token_url     => 'https://api.napster.com/oauth/access_token'
+        :token_url     => '/oauth/access_token'
       }
 
       uid{ raw_info['me']['id'] }
