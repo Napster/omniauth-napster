@@ -18,7 +18,10 @@ And then execute:
 
 Or install it yourself as:
 
-```$ gem install omniauth-napster, git: 'https://github.com/mrj/omniauth-napster.git'```
+```
+gem install specific_install
+gem specific_install -l 'https://github.com/mrj/omniauth-napster.git'
+```
 
 ## Usage
 
