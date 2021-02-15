@@ -10,18 +10,11 @@ This gem provides the [OmniAuth](https://github.com/intridea/omniauth) strategy 
 
 Add this line to your application's Gemfile:
 
-```$ gem 'omniauth-napster', git: 'https://github.com/mrj/omniauth-napster.git'```
+```$ gem 'omniauth-napster'```
 
 And then execute:
 
 ```$ bundle```
-
-Or install it yourself as:
-
-```
-gem install specific_install
-gem specific_install -l 'https://github.com/mrj/omniauth-napster.git'
-```
 
 ## Usage
 
@@ -30,19 +23,15 @@ You'll need to register your app with Napster.  Visit https://developer.napster.
 Using this gem is similar to other OmniAuth strategies.  Add your app credentials to `config/initializers/omniauth.rb`:
 
 ```ruby
-keys = Rails.application.secrets
-
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :napster, keys.napster['api_key'], keys.napster['api_secret']
+  provider :napster, ENV['NAPSTER_API_KEY'], ENV['NAPSTER_API_SECRET']
 end
 ```
 
 Or with Devise in `config/initializers/devise.rb`:
 
 ```ruby
-keys = Rails.application.secrets
-
-config.omniauth :napster, keys.napster['api_key'], keys.napster['api_secret']
+config.omniauth :napster, ENV['NAPSTER_API_KEY'], ENV['NAPSTER_API_SECRET']
 ```
 
 ## Auth Schema
@@ -132,7 +121,7 @@ Further information is available in `request.env['omniauth.auth'].raw_info`:
 
 ## More
 
-The original omniauth-napster gem was brought to you by the NAPI (Napster API) development team.  Please [reach out to us](https://groups.google.com/forum/#!forum/rhapsody-api) if you have any questions.
+This gem is brought to you by the NAPI (Napster API) development team.  Please [reach out to us](https://groups.google.com/forum/#!forum/rhapsody-api) if you have any questions.
 
 ## Contributing
 
