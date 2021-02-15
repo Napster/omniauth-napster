@@ -10,7 +10,6 @@ Gem::Specification.new do |s|
   s.description   = %q{This gem provides the OmniAuth strategy for connecting to the Napster API.}
   s.summary       = %q{OmniAuth strategy for Napster Music Service}
   s.homepage      = "https://github.com/Napster/omniauth-napster.git"
-  s.required_ruby_version = '~> 2.0'
   s.license    = 'MIT'
   s.files         = `git ls-files`.split($/)
   s.executables   = s.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
