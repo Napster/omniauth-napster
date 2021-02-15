@@ -38,50 +38,86 @@ Or with Devise in `config/initializers/devise.rb`:
 config.omniauth :napster, ENV['NAPSTER_API_KEY'], ENV['NAPSTER_API_SECRET']
 ```
 
-## Auth Hash Schema
+## Auth Schema
 
-Here's an example auth hash, available in `request.env['omniauth.auth']`:
-```
+`request.env['omniauth.auth'].auth` responds to the methods `token`, `refresh_token`, `expires_at` (Unix time), and `expires?` (true for Napster).
+
+Here's an example info hash, available in `request.env['omniauth.auth'].info`:
+
+```ruby
 {
-  "provider":"napster",
-  "uid":"295DC739BEDA4BB8E050960A380358BC",
-  "info": {
-    "uid":"295DC739BEDA4BB8E050960A380358BC",
-    "name":"Testy Testerson",
-    "username":"NAPIcat",
-    "image":"http://direct.rhapsody.com/imageserver/v2/external/aHR0cHM6Ly9yaGFwc29keS1uYXBpLnMzLmFtYXpvbmF3cy5jb20vbWVtYmVyLzI5NURDNzM5QkVEQTRCQjhFMDUwOTYwQTM4MDM1OEJDL2F2YXRhci9vcmlnaW5hbA%3D%3D/images/108x108.jpg"
-  },
-  "credentials": {
-    "token":"NTQ3NjI5NDktNWIyZC00MDVlLTg2MDMtZDhhMGQ2YTYzMTk3",
-    "refresh_token":"0b4bdad8-1c82-44d0-8cdb-dd8d2b6e6331",
-    "expires_at":1463103543,
-    "expires":true
-  },
-  "extra": {
-    "raw_info": {
-      "me": {
-        "id": "295DC739BEDA4BB8E050960A380358BC",
-        "realName": "Testy Testerson",
-        "screenName": "NAPIcat",
-        "bio": "The cat is back!",
-        "location":"Seattle, WA",
-        "visibility": "public",
-        "type": "member",
-        "href": "http://api.rhapsody.com/members/295DC739BEDA4BB8E050960A380358BC",
-        "favoriteAlbumsCount": 0,
-        "favoriteArtistsCount": 0,
-        "favoriteTracksCount": 0,
-        "playlistsTotalCount": 0,
-        "playlistsPublishedCount": 0,
-        "stationsCount": 0,
-        "radioCount": 0,
-        "followingCount": 2,
-        "followerCount": 10,
-        "avatar": "http://direct.rhapsody.com/imageserver/v2/external/aHR0cHM6Ly9yaGFwc29keS1uYXBpLnMzLmFtYXpvbmF3cy5jb20vbWVtYmVyLzI5NURDNzM5QkVEQTRCQjhFMDUwOTYwQTM4MDM1OEJDL2F2YXRhci9vcmlnaW5hbA%3D%3D/images/108x108.jpg",
-        "avatarId": "aHR0cHM6Ly9yaGFwc29keS1uYXBpLnMzLmFtYXpvbmF3cy5jb20vbWVtYmVyLzI5NURDNzM5QkVEQTRCQjhFMDUwOTYwQTM4MDM1OEJDL2F2YXRhci9vcmlnaW5hbA%3D%3D",
-        "defaultAvatar": "false",
-        "avatarVersion": 1465508896140
-      }
+  uid: '295DC739BEDA4BB8E050960A380358BC',
+  first_name: 'Testy',
+  last_name: 'Testerson',
+  username: 'testy@example.com',
+  screen_name: 'Reatta3634',
+  email: 'testy@example.com',
+  country_code: 'US',
+  preferred_language: 'en_US',
+  parental_control_enabled: false,
+  subscription_state: :expired      # :expired, :trial, or :paying
+  subscription_suspended: false
+}
+```
+
+Further information is available in `request.env['omniauth.auth'].raw_info`:
+
+```ruby
+{
+  "account" => {
+    "id" => "295DC739BEDA4BB8E050960A380358BC",
+    "type" => "account",
+    "href" => "https://api.napster.com/v2.0/me/account",
+    "created" => "2016-11-21T12:06:45.000Z",
+    "cobrand" => "40134",
+    "cocat" => "40134:101:en_US",
+    "originCode" => "napi",
+    "email" => "testy@example.com",
+    "country" => "US",
+    "zip" => nil,
+    "locale" => "en_US",
+    "userName" => "testy@example.com",
+    "firstName" => "Testy",
+    "lastName" => "Testerson",
+    "screenName" => "Reatta10117",
+    "nonDmcaRadioUser" => true,
+    "parentalControlEnabled" => false,
+    "isPublic" => true,
+    "isCurrentSubscriptionPayable" => false,
+    "scrobblingEnabled" => false,
+    "preferredLanguage" => "en_US",
+    "screenNameAutoCreated" => "true",
+    "subscription" => {
+      "id" => "",
+      "billingPartnerCode" => "Rhapsody",
+      "catalog" => "101",
+      "createDate" => "2016-11-21T12:06:45.000Z",
+      "isSuspended" => false,
+      "tierCode" => "R25",
+      "tierName" => "",
+      "productCode" => "",
+      "productName" => "",
+      "productServiceTerm" => "",
+      "expirationDate" => 0,
+      "trialLengthDays" => 0,
+      "isTrial" => false,
+      "state" => "EXPIRED"
+    },
+    "entitlements" => {
+      "canStreamOnWeb" => false,
+      "canStreamOnMobile" => false,
+      "canStreamOnHomeDevice" => false,
+      "canStreamOnPC" => false,
+      "canUpgradeStreams" => true,
+      "canPlayPremiumRadio" => false,
+      "maxStreamCount" => 0,
+      "isPlayBasedTier" => false,
+      "isMonthlyPlayBasedTier" => false,
+      "isOneTimePlayBasedTier" => false,
+      "totalPlays" => nil,
+      "playsRemaining" => nil,
+      "skipLimit" => 6,
+      "skipLimitMinutes" => 60
     }
   }
 }
