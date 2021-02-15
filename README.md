@@ -16,6 +16,10 @@ And then execute:
 
 ```$ bundle```
 
+Or install it yourself as:
+
+```$ gem install omniauth-napster```
+
 ## Usage
 
 You'll need to register your app with Napster.  Visit https://developer.napster.com/developer/apps/new to get started.
